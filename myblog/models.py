@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status='published')
+
 
 class BlogPost(models.Model):
     STATUS_CHOICE_DRAFT = 'D'
@@ -21,6 +25,9 @@ class BlogPost(models.Model):
     updated = models.DateTimeField(auto_now_add=True)
     status = models.CharField(
         max_length=15, choices=STATUS_CHOICES, default=STATUS_CHOICE_DRAFT)
+    
+    objects = models.Manager() # The default manager.
+    published = PublishedManager() # Our custom manager.
     
     class Meta:
         ordering = ('-publish',) # Orders by date published from latest to earliest
