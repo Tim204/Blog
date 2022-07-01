@@ -21,6 +21,6 @@ def post_detail(request, year, month, day, post):
 
     context = {'post': post}
     return render(request,
-                  'blog/post/detail.html',
+                  'myblog/post/detail.html',
                   context
                   )
