@@ -124,4 +124,7 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
+# for viewing emails on the terminal window
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
