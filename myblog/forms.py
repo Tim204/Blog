@@ -1,4 +1,5 @@
 from django import forms
+from myblog.models import Comment
 
 class BlogPostEmailForm(forms.Form):
     name = forms.CharField(max_length=25)
@@ -7,3 +8,8 @@ class BlogPostEmailForm(forms.Form):
     comments = forms.CharField(required=False,
                                widget=forms.Textarea)
 
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'email', 'body')
