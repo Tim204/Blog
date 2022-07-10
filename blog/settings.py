@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'myblog',
     # Other apps
     'taggit',
+    "bootstrap5",
 ]
 
 MIDDLEWARE = [
