@@ -9,6 +9,7 @@ django-taggit = "*"
 markdown = "*"
 mysqlclient = "*"
 django-bootstrap-v5 = "*"
+pillow = "*"
 
 [dev-packages]
 autopep8 = "*"
