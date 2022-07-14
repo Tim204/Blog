@@ -28,7 +28,7 @@ class BlogPost(models.Model):
     updated = models.DateTimeField(auto_now_add=True)
     status = models.CharField(
         max_length=15, choices=STATUS_CHOICES, default=STATUS_CHOICE_DRAFT)
-
+    
     objects = models.Manager()  # The default manager.
     published = PublishedManager()  # Our custom manager.
     tags = TaggableManager()

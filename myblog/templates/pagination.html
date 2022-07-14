@@ -1,4 +1,4 @@
-<div class="pagination">
+<!-- <div class="pagination">
     <span class="step-links">
       {% if page.has_previous %}
         <a href="?page={{ page.previous_page_number }}">Previous</a>
@@ -10,4 +10,19 @@
         <a href="?page={{ page.next_page_number }}">Next</a>
       {% endif %}
     </span>
+  </div> -->
+
+  <div class="col-lg-12 mt-3">
+    <nav class="navigation pagination py-2 d-inline-block">
+      <div class="nav-links">
+        {% if page.has_previous %}
+        <a class="prev page-numbers" href="?page={{ page.previous_page_number }}">Prev</a>
+        {% endif %}
+        <span aria-current="page" class="page-numbers current">page {{ page.number }} of</span>
+        <a class="page-numbers" href="#">{{ page.paginator.num_pages }}</a>
+        {% if page.has_next %}
+        <a class="next page-numbers" href="?page={{ page.next_page_number }}">Next</a>
+        {% endif %}
+      </div>
+    </nav>
   </div>

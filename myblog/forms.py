@@ -13,3 +13,14 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('name', 'email', 'body')
+        labels = {
+            'name': '',
+            'email': '',
+            'body': '',
+        }
+
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Name:'}),
+            'email': forms.TextInput(attrs={'placeholder': 'Your email address:'}),
+            'body': forms.Textarea(attrs={'placeholder': 'Comment'})
+        }

@@ -105,7 +105,7 @@
         <div class="col-lg-12">
           <nav class="navbar navbar-expand-lg px-0 py-4">
             <a class="navbar-brand" href="index.html">
-              Mega<span>kit.</span>
+              Personal<span>Blog.</span>
             </a>
       
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample09"
@@ -191,88 +191,9 @@
 		<div class="row">
 			<div class="col-lg-8">
 				<div class="row">
-					<div class="col-lg-6 col-md-6 mb-5">
-						<div class="blog-item">
-							<img loading="lazy" src="images/blog/1.jpg" alt="blog" class="img-fluid rounded">
-
-							<div class="blog-item-content bg-white p-4">
-								<div class="blog-item-meta  py-1 px-2">
-									<span class="text-muted text-capitalize mr-3"><i class="ti-pencil-alt mr-2"></i>Creativity</span>
-								</div>
-
-								<h3 class="mt-3 mb-3"><a href="blog-single.html">Improve design with typography?</a></h3>
-								<p class="mb-4">Non illo quas blanditiis repellendus laboriosam minima animi. Consectetur accusantium
-									pariatur repudiandae!</p>
-
-								<a href="blog-single.html" class="btn btn-small btn-main btn-round-full">Learn More</a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-6 col-md-6 mb-5">
-						<div class="blog-item">
-							<img loading="lazy" src="images/blog/2.jpg" alt="blog" class="img-fluid rounded">
-
-							<div class="blog-item-content bg-white p-4">
-								<div class="blog-item-meta py-1 px-2">
-									<span class="text-muted text-capitalize mr-3"><i class="ti-pencil-alt mr-2"></i>Design</span>
-								</div>
-
-								<h3 class="mt-3 mb-3"><a href="blog-single.html">Interactivity connect consumer</a></h3>
-								<p class="mb-4">Non illo quas blanditiis repellendus laboriosam minima animi. Consectetur accusantium
-									pariatur repudiandae!</p>
-
-								<a href="blog-single.html" class="btn btn-small btn-main btn-round-full">Learn More</a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-6 col-md-6 mb-5">
-						<div class="blog-item">
-							<img loading="lazy" src="images/blog/3.jpg" alt="blog" class="img-fluid rounded">
-
-							<div class="blog-item-content bg-white p-4">
-								<div class="blog-item-meta py-1 px-2">
-									<span class="text-muted text-capitalize mr-3"><i class="ti-pencil-alt mr-2"></i>Community</span>
-								</div>
-
-								<h3 class="mt-3 mb-3"><a href="blog-single.html">Marketing Strategy to bring more affect</a></h3>
-								<p class="mb-4">Non illo quas blanditiis repellendus laboriosam minima animi. Consectetur accusantium
-									pariatur repudiandae!</p>
-
-								<a href="blog-single.html" class="btn btn-small btn-main btn-round-full">Learn More</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6 col-md-6 mb-5">
-						<div class="blog-item">
-							<img loading="lazy" src="images/blog/4.jpg" alt="blog" class="img-fluid rounded">
-
-							<div class="blog-item-content bg-white p-4">
-								<div class="blog-item-meta py-1 px-2">
-									<span class="text-muted text-capitalize mr-3"><i class="ti-pencil-alt mr-2"></i>Marketing</span>
-								</div>
-
-								<h3 class="mt-3 mb-3"><a href="blog-single.html">Marketing Strategy to bring more affect</a></h3>
-								<p class="mb-4">Non illo quas blanditiis repellendus laboriosam minima animi. Consectetur accusantium
-									pariatur repudiandae!</p>
-
-								<a href="blog-single.html" class="btn btn-small btn-main btn-round-full">Learn More</a>
-							</div>
-						</div>
-					</div>
-
-					
-					<div class="col-lg-12 mt-3">
-						<nav class="navigation pagination py-2 d-inline-block">
-							<div class="nav-links">
-								<a class="prev page-numbers" href="#">Prev</a>
-								<span aria-current="page" class="page-numbers current">1</span>
-								<a class="page-numbers" href="#">2</a>
-								<a class="next page-numbers" href="#">Next</a>
-							</div>
-						</nav>
-					</div>
+          {% block blog_posts %}
+          
+          {% endblock %}
 				</div>
 			</div>
 			<div class="col-lg-4 mt-5 mt-lg-0">
@@ -312,17 +233,30 @@
 					<div class="sidebar-widget latest-post card border-0 p-4 mb-3">
 						<h5>Latest Posts</h5>
             {% show_latest_posts 3 %}
+					</div>
 
-						
+      
+        <div class="sidebar-widget latest-post card border-0 p-4 mb-3">
+        <h5>Most Commented Posts</h5>
+        {% get_most_commented_posts as most_commented_posts %}
+            {% for post in most_commented_posts %}
+            <div class="media border-bottom py-3">
+              <a href="#"><img loading="lazy" class="mr-4" src="images/blog/bt-3.jpg" alt="blog"></a>
+              <div class="media-body">
+                  <h6 class="my-2"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h6>
+                  <span class="text-sm text-muted">{{ posts.created }}</span>
+              </div>
+            </div>
+            {% endfor %}
 					</div>
 
 					<div class="sidebar-widget bg-white rounded tags p-4 mb-3">
 						<h5 class="mb-4">Tags</h5>
             {% for post in posts %}
-  {% for tag in post.tags.all %}
-  <a href="{% url 'myblog:post_list_by_tag' tag.slug %}">{{ tag.name }}</a>
-  {% endfor %}
-{% endfor %}
+              {% for tag in post.tags.all %}
+              <a href="{% url 'myblog:post_list_by_tag' tag.slug %}">{{ tag.name }}</a>
+              {% endfor %}
+            {% endfor %}
 						<a href="#">Web</a>
 						<a href="#">agency</a>
 						<a href="#">company</a>
@@ -393,7 +327,7 @@
         <div class="col-lg-6">
           <div class="copyright">
             Copyright &copy; 2020, Designed &amp; Developed by <a href="https://themefisher.com/"
-              >Themefisher</a>
+              >TimCoders</a>
           </div>
         </div>
         <div class="col-lg-6 text-left text-lg-right">

@@ -10,6 +10,7 @@ markdown = "*"
 mysqlclient = "*"
 django-bootstrap-v5 = "*"
 pillow = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 autopep8 = "*"

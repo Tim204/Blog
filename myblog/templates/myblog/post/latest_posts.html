@@ -8,7 +8,7 @@
         <a href="#"><img loading="lazy" class="mr-4" src="images/blog/bt-3.jpg" alt="blog"></a>
         <div class="media-body">
             <h6 class="my-2"><a href="{{ posts.get_absolute_url }}">{{ posts.title }}</a></h6>
-            <span class="text-sm text-muted">{{ created }}</span>
+            <span class="text-sm text-muted">{{ posts.created }}</span>
         </div>
     </div>
     {% endfor %}
