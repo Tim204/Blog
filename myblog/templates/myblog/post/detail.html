@@ -4,13 +4,17 @@
 
 
 {% block title %}{{ post.title }}{% endblock %}
-
+<!-- 
 {% block content %}
   <h1>{{ post.title }}</h1>
   <p class="date">
     Published {{ post.publish }} by {{ post.author }}
   </p>
   {{ post.body|markdown }}
+
+  {% for tag in post.tags.all %}
+  {{ tag.name }}
+  {% endfor %}
 
   <p>
     <a href="{% url 'myblog:post_share' post.id %}">
@@ -47,16 +51,16 @@
   <h2>Your comment has been added</h2>
   {% else %}
   <form action="" method="post">
-    {{ comment_form.as_p }}
+    {{ comment_form|crispy }}
     {% csrf_token %}
-    <p> <input type="submit" value="Add comment"></p>
+    <p> <input type="submit" class="btn btn-main btn-round-full" value="Add comment"></p>
     </form>
-  {% endif %}
+  {% endif %} -->
 
   {% block blog_posts %}
   <div class="col-lg-12 mb-5">
     <div class="single-blog-item">
-      <img loading="lazy" src="images/blog/2.jpg" alt="blog" class="img-fluid rounded">
+      <img loading="lazy" src="{{ post.thumbnail.url }}" alt="blog" class="img-fluid rounded">
 
       <div class="blog-item-content bg-white p-5">
         <div class="blog-item-meta bg-gray pt-2 pb-1 px-3">
@@ -88,13 +92,19 @@
         <div class="tag-option mt-5 d-block d-md-flex justify-content-between align-items-center">
           <ul class="list-inline">
             <li>Tags:</li>
-            <li class="list-inline-item"><a href="#" rel="tag">Advancher</a></li>
-            <li class="list-inline-item"><a href="#" rel="tag">Landscape</a></li>
-            <li class="list-inline-item"><a href="#" rel="tag">Travel</a></li>
+            {% for tag in post.tags.all %}
+            <li class="list-inline-item"><a href="{% url 'myblog:post_list_by_tag' tag.slug %}" rel="tag"> {{ tag.name }}</a></li>
+           {% endfor %}
+
           </ul>
 
           <ul class="list-inline">
             <li class="list-inline-item"> Share: </li>
+            <p>
+              <a href="{% url 'myblog:post_share' post.id %}">
+                Share this post
+              </a>
+            </p>
             <li class="list-inline-item"><a href="#" ><i class="fab fa-facebook-f"
                   aria-hidden="true"></i></a></li>
             <li class="list-inline-item"><a href="#" ><i class="fab fa-twitter"
@@ -108,26 +118,22 @@
       </div>
     </div>
   </div>
-
+  <h2>Similar posts</h2>
   <div class="col-lg-12 mb-5">
     <div class="posts-nav bg-white p-5 d-lg-flex d-md-flex justify-content-between ">
-      <a class="post-prev align-items-center" href="#">
+      {% for post in similar_posts %}
+      <a class="post-prev align-items-center" href="{{ post.get_absolute_url }}">
         <div class="posts-prev-item mb-4 mb-lg-0">
-          <span class="nav-posts-desc text-color">- Previous Post</span>
+          <span class="nav-posts-desc text-color">- Read Now</span>
           <h6 class="nav-posts-title mt-1">
-            Donec consectetuer ligula <br>vulputate sem tristique.
+            {{ post.title|linebreaks }} 
           </h6>
         </div>
       </a>
       <div class="border"></div>
-      <a class="posts-next" href="#">
-        <div class="posts-next-item pt-4 pt-lg-0">
-          <span class="nav-posts-desc text-lg-right text-md-right text-color d-block">- Next Post</span>
-          <h6 class="nav-posts-title mt-1">
-            Ut aliquam sollicitudin leo.
-          </h6>
-        </div>
-      </a>
+      {% empty %}
+      There are no similar posts yet.
+    {% endfor %}
     </div>
   </div>
 
@@ -163,28 +169,34 @@
   </div>
 
   <div class="col-lg-12">
-    <form class="contact-form bg-white rounded p-5" id="comment-form">
+    {% if new_comment %}
+  <h2>Your comment has been added</h2>
+  {% else %}
+    <form class="contact-form bg-white rounded p-5" id="comment-form" method="post" action="">
       <h4 class="mb-4">Write a comment</h4>
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <input class="form-control" type="text" name="name" id="name" placeholder="Name:">
+            {{ comment_form.name|as_crispy_field }}
+            <!-- <input class="form-control" type="text" name="name" id="name" placeholder="Name:"> -->
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <input class="form-control" type="text" name="mail" id="mail" placeholder="Email:">
+            {{ comment_form.email|as_crispy_field }}
+            <!-- <input class="form-control" type="text" name="mail" id="mail" placeholder="Email:"> -->
           </div>
         </div>
       </div>
-
-
-      <textarea class="form-control mb-3" name="comment" id="comment" cols="30" rows="5"
-        placeholder="Comment"></textarea>
-
+      
+      <!-- <textarea class="form-control mb-3" name="comment" id="comment" cols="30" rows="5"
+        placeholder="Comment"></textarea> -->
+        {{ comment_form.body|as_crispy_field }}
       <input class="btn btn-main btn-round-full" type="submit" name="submit-contact" id="submit_contact"
         value="Submit Message">
+        {% csrf_token %}
     </form>
+    {% endif %}
   </div>
   {% endblock %}
 

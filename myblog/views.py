@@ -17,8 +17,9 @@ def post_list(request, tag_slug=None):
         tag = get_object_or_404(Tag, slug=tag_slug)
         object_list = object_list.filter(tags__in=[tag])
 
-    paginator = Paginator(object_list, 2)  # 3 posts in each page
+    paginator = Paginator(object_list, 4)  # 3 posts in each page
     page = request.GET.get('page')
+    tags = Tag.objects.all().distinct()
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
@@ -30,7 +31,8 @@ def post_list(request, tag_slug=None):
 
     context = {'page': page,
                'posts': posts,
-               'tag': tag
+               'tag': tag,
+               'tags': tags
                }
     return render(request,
                   'myblog/post/list.html',
@@ -76,12 +78,14 @@ def post_detail(request, year, month, day, post):
                                   .exclude(id=post.id)
     similar_posts = similar_posts.annotate(same_tags=Count('tags'))\
                                 .order_by('-same_tags','-publish')[:4]
+    tags = Tag.objects.all().distinct()
 
     context = {'post': post,
                'comments': comments,
                'new_comment': new_comment,
                'comment_form': comment_form,
-               'similar_posts': similar_posts
+               'similar_posts': similar_posts,
+               'tags': tags
                }
                
     return render(request,

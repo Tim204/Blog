@@ -3,7 +3,7 @@
 
 
 {% block title %}My Blog{% endblock %}
-
+<!-- 
 {% block content %}
   <h1>My Blog</h1>
   {% if tag %}
@@ -26,13 +26,13 @@
       Published {{ post.publish }} by {{ post.author }}
     </p>
     {{ post.body|markdown|truncatewords_html:30 }}
-  {% endfor %}
+  {% endfor %} -->
   {% block blog_posts %}
 
   {% for post in posts %}
   <div class="col-lg-6 col-md-6 mb-5">
     <div class="blog-item">
-      <img loading="lazy" src="images/blog/1.jpg" alt="blog" class="img-fluid rounded">
+      <img loading="lazy" src="{{ post.thumbnail.url }}" alt="blog" class="img-fluid rounded">
       
 
       <div class="blog-item-content bg-white p-4">
@@ -41,8 +41,7 @@
         </div>
 
         <h3 class="mt-3 mb-3"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
-        <p class="mb-4">Non illo quas blanditiis repellendus laboriosam minima animi. Consectetur accusantium
-          pariatur repudiandae!</p>
+        <p class="mb-4">{{ post.body|markdown|truncatewords_html:10 }}</p>
 
         <a href="{{ post.get_absolute_url }}" class="btn btn-small btn-main btn-round-full">Learn More</a>
       </div>
