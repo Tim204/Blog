@@ -47,6 +47,12 @@ class BlogPost(models.Model):
                              self.publish.day, self.slug])
 
 
+class AuthorProfile(models.Model):
+    
+    pass
+
+
+
 class Comment(models.Model):
     post = models.ForeignKey(
         BlogPost, on_delete=models.CASCADE, related_name='comments')

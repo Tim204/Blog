@@ -75,9 +75,9 @@ def post_detail(request, year, month, day, post):
     # List of similar posts
     post_tags_ids = post.tags.values_list('id', flat=True)
     similar_posts = BlogPost.published.filter(tags__in=post_tags_ids)\
-                                  .exclude(id=post.id)
+        .exclude(id=post.id)
     similar_posts = similar_posts.annotate(same_tags=Count('tags'))\
-                                .order_by('-same_tags','-publish')[:4]
+        .order_by('-same_tags', '-publish')[:4]
     tags = Tag.objects.all().distinct()
 
     context = {'post': post,
@@ -87,11 +87,27 @@ def post_detail(request, year, month, day, post):
                'similar_posts': similar_posts,
                'tags': tags
                }
-               
+
     return render(request,
                   'myblog/post/detail.html',
                   context
                   )
+
+
+class SearchResulView(ListView):
+    model = BlogPost
+    template_name = 'myblog/post/search_results.html'
+    context_object_name = 'search_results'
+
+    def get_queryset(self):
+        return super().get_queryset().filter(
+            title__icontains=self.request.GET.get('q')
+        )
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['query'] = self.request.GET.get('q')
+        return context
 
 
 def post_share(request, post_id):

@@ -4,6 +4,7 @@
 
 
 {% block title %}{{ post.title }}{% endblock %}
+{% block page-title %}Single Blog post{% endblock %}
 <!-- 
 {% block content %}
   <h1>{{ post.title }}</h1>
@@ -72,7 +73,7 @@
         </div>
 
         <h2 class="mt-3 mb-4">{{ post.title }}</h2>
-        <p class="lead mb-4">  {{ post.body|markdown }}</p>{{ post.tags }}
+        <p class="lead mb-4">  {{ post.body|markdown }}</p>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus natus, consectetur? Illum libero
           vel nihil nisi quae, voluptatem, sapiente necessitatibus distinctio voluptates, iusto qui. Laboriosam
@@ -99,20 +100,12 @@
           </ul>
 
           <ul class="list-inline">
-            <li class="list-inline-item"> Share: </li>
-            <p>
-              <a href="{% url 'myblog:post_share' post.id %}">
-                Share this post
+            <li class="list-inline-item"> Share this post: </li>
+            <li class="list-inline-item">
+              <a href="{% url 'myblog:post_share' post.id %}" aria-hidden="true">
+                <i class="fas fa-mail-bulk"></i>
               </a>
-            </p>
-            <li class="list-inline-item"><a href="#" ><i class="fab fa-facebook-f"
-                  aria-hidden="true"></i></a></li>
-            <li class="list-inline-item"><a href="#" ><i class="fab fa-twitter"
-                  aria-hidden="true"></i></a></li>
-            <li class="list-inline-item"><a href="#" ><i class="fab fa-pinterest-p"
-                  aria-hidden="true"></i></a></li>
-            <li class="list-inline-item"><a href="#" ><i class="fab fa-google-plus"
-                  aria-hidden="true"></i></a></li>
+            </li>
           </ul>
         </div>
       </div>
@@ -146,10 +139,10 @@
         {% for comment in comments %}
         <li class="mb-5">
           <div class="comment-area-box">
-            <img loading="lazy" alt="comment-author" src="images/blog/test1.jpg" class="img-fluid float-left mr-3 mt-2">
+            <!-- <img loading="lazy" alt="comment-author" src="images/blog/test1.jpg" class="img-fluid float-left mr-3 mt-2"> -->
 
             <h5 class="mb-1">{{ foorloop.counter }} {{ comment.name }}</h5>
-            <span>United Kingdom</span>
+            <!-- <span>United Kingdom</span> -->
 
             <div class="comment-meta mt-4 mt-lg-0 mt-md-0 float-lg-right float-md-right">
               <a href="#"><i class="icofont-reply mr-2 text-muted"></i>Reply |</a>
