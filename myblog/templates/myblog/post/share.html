@@ -8,10 +8,11 @@
 
 {% block blog_posts %}
   {% if sent %}
-  <h3 class="text-md mb-4">E-mail successfully sent</h3>
+  <h3 class="text-md mb-4" style="color: green;">E-mail successfully sent!</h3>
     <p>
-      "{{ post.title }}" was successfully sent to {{ form.cleaned_data.to }}.
+      <h6 style="color: green;"><i> "{{ post.title }}"</i> was successfully sent to {{ form.cleaned_data.to }}.</h6> 
     </p>
+    <a href="{% url 'myblog:post_list' %}"><button class="btn btn-main">Back to Posts </button></a>
   {% else %}
   <h3 class="text-md mb-4">Share "{{ post.title }}" by e-mail</h3>
     <form method="post">

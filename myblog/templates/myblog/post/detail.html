@@ -103,7 +103,7 @@
             <li class="list-inline-item"> Share this post: </li>
             <li class="list-inline-item">
               <a href="{% url 'myblog:post_share' post.id %}" aria-hidden="true">
-                <i class="fas fa-mail-bulk"></i>
+                <i class="fas fa-envelope"></i>
               </a>
             </li>
           </ul>
@@ -181,12 +181,9 @@
           </div>
         </div>
       </div>
-      
-      <!-- <textarea class="form-control mb-3" name="comment" id="comment" cols="30" rows="5"
-        placeholder="Comment"></textarea> -->
         {{ comment_form.body|as_crispy_field }}
       <input class="btn btn-main btn-round-full" type="submit" name="submit-contact" id="submit_contact"
-        value="Submit Message">
+        value="Submit Comment">
         {% csrf_token %}
     </form>
     {% endif %}
