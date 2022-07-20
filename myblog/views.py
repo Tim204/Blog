@@ -40,12 +40,6 @@ def post_list(request, tag_slug=None):
                   )
 
 
-# class PostListView(ListView):
-#     queryset = BlogPost.published.all()
-#     context_object_name = 'posts'
-#     paginate_by = 3
-#     template_name = 'myblog/post/list.html'
-
 
 def post_detail(request, year, month, day, post):
     post = get_object_or_404(BlogPost, slug=post,

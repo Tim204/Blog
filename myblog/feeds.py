@@ -5,6 +5,9 @@ from .models import BlogPost
 
 
 class LatestPostsFeed(Feed):
+    """Requires opening with the URL in an RSS client
+    to see the feeds in a user friendly manner
+    """
     title = 'My blog'
     link = reverse_lazy('myblog:post_list')
     description = 'New posts of my blog.'
