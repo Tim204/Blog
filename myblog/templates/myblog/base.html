@@ -159,9 +159,11 @@
            
 					</div>
 
+       
+        
 					<div class="sidebar-widget card border-0 mb-3">
-            {% for blog in posts %}
-              {% for author in blog.post.all %}
+            {% for post in blog_posts %}
+              {% for author in post.post.all %}
 						<img loading="lazy" src="{{ author.picture.url }}" alt="blog-author" class="img-fluid">
 						<div class="card-body p-4 text-center">
               

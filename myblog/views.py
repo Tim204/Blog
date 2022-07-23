@@ -19,7 +19,6 @@ def post_list(request, tag_slug=None):
 
     paginator = Paginator(object_list, 4)  # 3 posts in each page
     page = request.GET.get('page')
-    tags = Tag.objects.all().distinct()
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
@@ -32,7 +31,6 @@ def post_list(request, tag_slug=None):
     context = {'page': page,
                'posts': posts,
                'tag': tag,
-               'tags': tags
                }
     return render(request,
                   'myblog/post/list.html',
