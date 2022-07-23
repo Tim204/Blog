@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -48,8 +49,15 @@ class BlogPost(models.Model):
 
 
 class AuthorProfile(models.Model):
-    
-    pass
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    picture = models.ImageField(upload_to='blogpost/images/author', blank=True)
+    phone = models.CharField(max_length=255)
+    birth_date = models.DateField(null=True, blank=True)
+    blog_post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='post')
+
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name}'
 
 
 

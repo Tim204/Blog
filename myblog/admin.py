@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import BlogPost, Comment
+from .models import BlogPost, Comment, AuthorProfile
 
+admin.site.register(AuthorProfile)
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):

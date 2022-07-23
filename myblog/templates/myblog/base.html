@@ -160,9 +160,14 @@
 					</div>
 
 					<div class="sidebar-widget card border-0 mb-3">
-						<img loading="lazy" src="{% static 'images/blog/blog-author.jpg'  %}" alt="blog-author" class="img-fluid">
+            {% for blog in posts %}
+              {% for author in blog.post.all %}
+						<img loading="lazy" src="{{ author.picture.url }}" alt="blog-author" class="img-fluid">
 						<div class="card-body p-4 text-center">
-							<h5 class="mb-0 mt-4">{{ post.author.first_name }} {{ post.author.last_name }}</h5>
+              
+                <!-- {{ author.birth_date}} <img src="{{ author.picture.url }}" alt=""> -->
+             
+							<h5 class="mb-0 mt-4"> {{ author }}</h5>
 							<p>Digital Marketer</p>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, dolore.</p>
 
@@ -184,6 +189,8 @@
 								</li>
 							</ul>
 						</div>
+            {% endfor %}
+            {% endfor %}
 					</div>
 
 					<div class="sidebar-widget latest-post card border-0 p-4 mb-3">
