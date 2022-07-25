@@ -55,6 +55,8 @@ class AuthorProfile(models.Model):
     phone = models.CharField(max_length=255)
     birth_date = models.DateField(null=True, blank=True)
     blog_post = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='post')
+    occupation_title = models.CharField(max_length=100, blank=True)
+    about_me = models.TextField(max_length=150, blank=True)
 
     def __str__(self):
         return f'{self.user.first_name} {self.user.last_name}'
