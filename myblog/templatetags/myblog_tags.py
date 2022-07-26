@@ -1,6 +1,7 @@
 from django.db.models import Count
 from django.utils.safestring import mark_safe
 from django import template
+import readtime
 import markdown
 from ..models import BlogPost
 
@@ -29,3 +30,8 @@ def get_most_commented_posts(count=3):
 @register.filter(name='markdown')
 def markdown_format(text):
     return mark_safe(markdown.markdown(text))
+
+@register.filter(name='readtime')
+def read(html):
+    return readtime.of_html(html)
+

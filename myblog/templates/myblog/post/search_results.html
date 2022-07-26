@@ -14,7 +14,7 @@
 
 		<div class="blog-item-content bg-white p-4">
 			<div class="blog-item-meta  py-1 px-2">
-			<span class="text-muted text-capitalize mr-3"><i class="ti-pencil-alt mr-2"></i>Creativity</span>
+			<span class="text-muted text-capitalize mr-3"><i class="ti-timer mr-2"></i>{{ result.body|markdown|readtime }}</span>
 			{% with result.comments.count as total_comments %}
 			<span class="text-muted text-capitalize mr-3"><i class="ti-comment mr-2"></i>{{ total_comments }} Comment{{ total_comments|pluralize }}</span>
 			{% endwith %} 
