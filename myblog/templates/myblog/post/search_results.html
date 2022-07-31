@@ -1,5 +1,6 @@
 {% extends "myblog/base.html" %}
 {% load myblog_tags %}
+{% load static %}
 
 
 {% block title %} Search Results {% endblock %}
@@ -9,7 +10,7 @@
 	{%  for result in search_results %}
 	<div class="col-lg-6 col-md-6 mb-5">
 		<div class="blog-item">
-		<img loading="lazy" src="{{ result.thumbnail.url }}" alt="blog" class="img-fluid rounded">
+		<img loading="lazy" src="{% if result.thumbnail %}{{ result.thumbnail.url }} {% else %}{% static 'images/no_image.png' %}{% endif %}" alt="blog" class="img-fluid rounded">
 		
 
 		<div class="blog-item-content bg-white p-4">
