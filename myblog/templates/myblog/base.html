@@ -175,10 +175,7 @@
             {% for post in blog_posts %}
               {% for author in post.post.all %}
 						<img loading="lazy" src="{{ author.picture.url }}" alt="blog-author" class="img-fluid">
-						<div class="card-body p-4 text-center">
-              
-                <!-- {{ author.birth_date}} <img src="{{ author.picture.url }}" alt=""> -->
-             
+						<div class="card-body p-4 text-center">             
 							<h5 class="mb-0 mt-4"> {{ author }}</h5>
 							<p>{{ author.occupation_title }}</p>
 							<p>{{ author.about_me }}</p>

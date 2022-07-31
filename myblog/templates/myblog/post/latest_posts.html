@@ -1,11 +1,7 @@
-
+{% load static %}
     {% for posts in latest_posts %}
-    <!-- <li>
-        <a href="{{ post.get_absolute_url }}">{{ posts.title }}</a>
-    </li>
-     -->
     <div class="media border-bottom py-3">
-        <a href="{{ posts.get_absolute_url }}"><img loading="lazy" class="mr-4" style="max-width: 10ch; max-height: 20vh;" src="{{ posts.thumbnail.url }}" alt="blog"></a>
+        <a href="{{ posts.get_absolute_url }}"><img loading="lazy" class="mr-4" style="max-width: 10ch; max-height: 20vh;" src="{% if posts.thumbnail %}{{ posts.thumbnail.url }} {% else %}{% static 'images/no_image.png' %}{% endif %}" alt="blog"></a>
         <div class="media-body">
             <h6 class="my-2"><a href="{{ posts.get_absolute_url }}">{{ posts.title }}</a></h6>
             <span class="text-sm text-muted">{{ posts.created }}</span>

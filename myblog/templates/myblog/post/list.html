@@ -1,4 +1,5 @@
 {% extends "myblog/base.html" %}
+{% load static %}
 {% load myblog_tags %}
 
 
@@ -32,7 +33,7 @@
   {% for post in posts %}
   <div class="col-lg-6 col-md-6 mb-5">
     <div class="blog-item">
-      <img loading="lazy" src="{{ post.thumbnail.url }}" alt="blog" class="img-fluid rounded">
+      <img loading="lazy" src="{% if post.thumbnail %}{{ post.thumbnail.url }} {% else %}{% static 'images/no_image.png' %}{% endif %}" alt="blog" class="img-fluid rounded">
       
 
       <div class="blog-item-content bg-white p-4">
