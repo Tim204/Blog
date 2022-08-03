@@ -22,3 +22,5 @@ pip install -r requirements.txt
 ```
 * Run your migrations 
 * Finally create a supper user to access your django admin pannel, and populate your database.
+
+[Link to the live version of the project: Blog](https://personalblog.pythonanywhere.com/)
