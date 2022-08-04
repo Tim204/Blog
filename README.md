@@ -23,5 +23,12 @@ pip install -r requirements.txt
 * Run your migrations 
 * Finally create a supper user to access your django admin pannel, and populate your database.
 
-### Live Version
+---
+**NOTE**
+
+In order to appropriately render the data on the "feed" some form of RSS feed is required.
+
+---
+
+## Live Version
 [Link to the live version of the project: Blog](https://personalblog.pythonanywhere.com/)
